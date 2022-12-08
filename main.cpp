@@ -56,9 +56,16 @@ std::pair<const char*, const char*> InputHandler() {
 	std::cout << "Grab: 2" << std::endl;
 	std::cout << "Craft: 3" << std::endl;
 	std::cout << "What action do you want to do?: " << std::endl;
-	while (!(std::cin >> com)) {
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	while (true) {
+			std::cin >> com;
+			if (!std::cin) {
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				continue;
+			}
+			else if (com >= 1 && com <= 3) {
+				break;
+			}
 	}
 
 	// direction input
@@ -68,10 +75,17 @@ std::pair<const char*, const char*> InputHandler() {
 	  std::cout << "East:  3" << std::endl;
 	  std::cout << "West:  4" << std::endl;
 		std::cout << "Where from/to?: " << std::endl;
-	  while (!(std::cin >> dir)) {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		}
+	  while (true) {
+			std::cin >> dir;
+			if (!std::cin) {
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				continue;
+			}
+			else if (dir >= 1 && dir <= 4) {
+				break;
+			}
+		}	
 	}
 
 	if (com == move) command = "move";
